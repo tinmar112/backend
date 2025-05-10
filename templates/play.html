@@ -1,0 +1,30 @@
+<html>
+
+    <body>
+        <div>
+            {% for combination in already_played %}
+                <div> {{combination}} <br>
+                <br>
+                </div>
+            {% endfor %}
+        </div>
+
+        <form action="/play" method="POST">
+            <input type="text"
+                name="1st colour"
+                placeholder="1st colour">
+            <input type="text"
+                name="2nd colour"
+                placeholder="2nd colour">
+            <input type="text"
+                name="3rd colour"
+                placeholder="3rd colour">
+            <input type="text"
+                name="4th colour"
+                placeholder="4th colour">
+            <button type="Submit">submit</button>
+        </form>
+
+    </body>
+
+</html>
