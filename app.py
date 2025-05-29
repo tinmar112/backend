@@ -1,11 +1,12 @@
 from flask import Flask, redirect, request, render_template
-
+import random
 from pegs import pegs
 
 
 app = Flask(__name__)
 
 winning_combo: list[str] = ['','','','']
+colors = ['red', 'green', 'blue', 'yellow', 'purple', 'orange']
 played: list[str] = []
 
 @app.route('/')
@@ -16,9 +17,10 @@ def login_page():
 @app.route('/start')
 def start():
     global winning_combo
-    winning_combo = ['green','green','yellow','yellow']
+    winning_combo = random.choices(colors, k=4)
+    print(winning_combo) # plus simple pour jouer rapidement haha
     global played
-    played = ['The combinations you have played will appear below.']
+    played = [f'The combinations you have played will appear below. Choose colors from the following list : {colors}']
     return render_template('play.html', already_played=played)
 
 
@@ -43,8 +45,7 @@ def play():
             global played
             played.append(f"{first_colour} {second_colour} {third_colour} {fourth_colour} => => => {pegs_result}")
 
-            return render_template('play.html', 
-                                   already_played=played)
+            return render_template('play.html', already_played=played)
 
 
 @app.route('/won')
